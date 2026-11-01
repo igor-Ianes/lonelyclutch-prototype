@@ -2753,3 +2753,103 @@ footer button {
         flex: 1
     }
 }
+
+
+/* ==========================================
+   CORREÇÃO DEFINITIVA DA SIDEBAR
+   Chrome Windows / Android
+========================================== */
+
+.sidebar {
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+    scrollbar-color: #393044 transparent;
+}
+
+/* Impede que os elementos principais sejam comprimidos */
+.sidebar .brand,
+.sidebar .profile,
+.sidebar .sidebar-bottom {
+    flex-shrink: 0;
+}
+
+/* Navegação pode crescer sem esconder o rodapé */
+.sidebar nav {
+    flex: 1 0 auto;
+    min-height: min-content;
+}
+
+/* Rodapé sempre acessível */
+.sidebar-bottom {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* Chrome Android e dispositivos móveis */
+@media (max-width: 850px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
+
+        padding-top: calc(18px + env(safe-area-inset-top));
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        z-index: 1001;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .scrim {
+        z-index: 1000;
+    }
+}
+
+/* Telas com pouca altura, inclusive notebooks */
+@media (max-height: 750px) {
+    .sidebar {
+        padding-top: 14px;
+        padding-bottom: 12px;
+    }
+
+    .brand {
+        padding-bottom: 15px;
+    }
+
+    .profile {
+        margin-bottom: 17px;
+    }
+
+    .nav-group {
+        margin-bottom: 15px;
+    }
+
+    .upgrade-card {
+        margin-bottom: 12px;
+    }
+}
+
+
